@@ -77,7 +77,6 @@ class CourseList extends React.Component {
                         <th><button onClick={this.createCourse}
                             className="btn btn-primary">Add</button></th>
                     </tr>
-
                     </thead>
 
                     <tbody>
