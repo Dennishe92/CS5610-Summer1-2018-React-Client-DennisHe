@@ -28,6 +28,18 @@ class ModuleList extends React.Component {
 
     }
 
+
+    setModules(modules) {
+        this.setState({modules: modules})
+    }
+
+
+    findAllModulesForCourse(courseId) {
+        this.moduleService.findAllModulesForCourse(courseId)
+            .then((modules) => {this.setModules(modules)});
+    }
+
+
     componentDidMount() {
         this.setCourseId(this.props.courseId);
     }
@@ -35,6 +47,8 @@ class ModuleList extends React.Component {
     //caching, rerendering
     componentWillReceiveProps(newProps){
         this.setCourseId(newProps.courseId);
+        this.findAllModulesForCourse(newProps.courseId)
+
     }
 
     setCourseId(courseId) {
