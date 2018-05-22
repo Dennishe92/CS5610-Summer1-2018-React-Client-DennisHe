@@ -3,6 +3,8 @@ import React from 'react'
 import ModuleList from './ModuleList'
 import ModuleEditor from './ModuleEditor'
 
+import Route from "react-router-dom/es/Route";
+
 class CourseEditor extends React.Component {
 
     constructor(props) {
@@ -36,7 +38,10 @@ class CourseEditor extends React.Component {
                         <ModuleList courseId={this.state.courseId}/>
                     </div>
                     <div className="col-8">
-                        <ModuleEditor courseId = {this.state.courseId}/>
+                        {/*<ModuleEditor courseId = {this.state.courseId}/>*/}
+                        <Route path="/course/:courseId/module/:moduleId"
+                               component={ModuleEditor}>
+                        </Route>
                     </div>
                 </div>
             </div>

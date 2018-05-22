@@ -17,14 +17,14 @@ class LessonService {
     }
 
     createLesson(courseId, moduleId, lesson) {
-        return fetch(LESSON_API_URL.replace('CID', courseId).repeat('MID', moduleId), {
+        return fetch(LESSON_API_URL.replace('CID', courseId).replace('MID', moduleId), {
             body: JSON.stringify(lesson),
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
             method: 'POST'
         }).then(function(response) {
-            return reponse.json();
+            return response.json();
         });
     }
 
@@ -54,5 +54,7 @@ class LessonService {
                 return reponse.json();
         });
     }
-    
+
 }
+
+export default LessonService;
