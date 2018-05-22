@@ -65,7 +65,8 @@ class ModuleList extends React.Component {
         this.moduleService.createModule(this.props.courseId, this.state.module)
             .then(() => {
                 this.findAllModulesForCourse(this.state.courseId);
-            })
+            });
+        document.getElementById('inputFld').value = '';
     }
 
 
@@ -81,7 +82,7 @@ class ModuleList extends React.Component {
     renderListOfModules() {
         let modules = this.state.modules.map(
             (module) => { // map iterates and accumlates results
-                return <ModuleListItem module={module} key={module.id}
+                return <ModuleListItem courseId={this.state.courseId} module={module} key={module.id}
                                        deleteModule={this.deleteModule}/>
             }
         );
@@ -93,9 +94,10 @@ class ModuleList extends React.Component {
             <div>
                 <h3>Module List for course: {this.state.courseId}</h3>
                 <input type="text"
+                       id="inputFld"
                        className="form-control"
                        onChange={this.titleChanged}
-                       placeholder="title"/>
+                       placeholder="Enter Module Name"/>
 
                 <button onClick={this.createModule} className="btn btn-primary btn-block">
                     <i className="fa fa-plus"></i>

@@ -1,8 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import { Link } from 'react-router-dom'
-
-class ModuleListItem extends React.Component {
+class LessonRow extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -10,9 +8,8 @@ class ModuleListItem extends React.Component {
     render() {
         return (
             <li className="list-group-item">
-                <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
-                {this.props.module.title}
-                </Link>
+                {this.props.lesson.title}
+
                 <span className="float-right">
                     <i  onClick={() => this.props.deleteModule(this.props.module.id)}
                         className="fa fa-trash"></i>
@@ -22,5 +19,3 @@ class ModuleListItem extends React.Component {
         );
     }
 }
-
-export default ModuleListItem;

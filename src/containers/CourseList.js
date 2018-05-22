@@ -68,6 +68,7 @@ class CourseList extends React.Component {
             .then(() => {
                 this.findAllCourses();
             });
+        document.getElementById('titleFld').value = '';
     }
 
 

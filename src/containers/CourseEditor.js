@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ModuleList from './ModuleList'
-import LessonTabs from './LessonTabs'
+import ModuleEditor from './ModuleEditor'
 
 class CourseEditor extends React.Component {
 
@@ -36,7 +36,7 @@ class CourseEditor extends React.Component {
                         <ModuleList courseId={this.state.courseId}/>
                     </div>
                     <div className="col-8">
-                        <LessonTabs/>
+                        <ModuleEditor courseId = {this.state.courseId}/>
                     </div>
                 </div>
             </div>
