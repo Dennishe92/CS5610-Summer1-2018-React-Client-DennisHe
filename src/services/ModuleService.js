@@ -1,6 +1,7 @@
 import React from 'react'
 
 const MODULE_API_URL = 'http://localhost:8080/api/course/CID/module';
+const MODULE_API_URL2 = 'http://localhost:8080/api/module';
 
 let _singleton = Symbol();
 class ModuleService {
@@ -26,6 +27,17 @@ class ModuleService {
     }
 
 
+    deleteModule(moduleId) {
+        return fetch(MODULE_API_URL2 + '/' + moduleId, {
+            body: JSON.stringify(moduleId),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'DELETE'
+        });
+    }
+
+
     findAllModulesForCourse(courseId) {
         return fetch(
             MODULE_API_URL
@@ -33,6 +45,13 @@ class ModuleService {
             .then(function (response) {
                 return response.json();
             })
+    }
+
+    findAllModules() {
+        return fetch(MODULE_API_URL2)
+            .then(function(response){
+                return response.json();
+            });
     }
 
 }

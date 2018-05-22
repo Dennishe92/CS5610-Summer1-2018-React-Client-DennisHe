@@ -16,6 +16,8 @@ class ModuleList extends React.Component {
         this.titleChanged = this.titleChanged.bind(this);
         this.createModule = this.createModule.bind(this);
         this.setCourseId = this.setCourseId.bind(this);
+        this.setModules = this.setModules.bind(this);
+        this.deleteModule = this.deleteModule.bind(this);
 
         this.moduleService = ModuleService.instance;
 
@@ -34,7 +36,9 @@ class ModuleList extends React.Component {
 
     findAllModulesForCourse(courseId) {
         this.moduleService.findAllModulesForCourse(courseId)
-            .then((modules) => {this.setModules(modules)});
+            .then((modules) => {
+                this.setModules(modules)
+            });
     }
 
 
@@ -55,17 +59,32 @@ class ModuleList extends React.Component {
         this.setState({module: {title: event.target.value}});
     }
 
+
     createModule(event) {
         console.log(this.state.module);
         this.moduleService.createModule(this.props.courseId, this.state.module)
+            .then(() => {
+                this.findAllModulesForCourse(this.state.courseId);
+            })
+    }
+
+
+    deleteModule(moduleId) {
+        this.moduleService
+            .deleteModule(moduleId)
+            .then(() => {
+                this.findAllModulesForCourse(this.state.courseId)
+            });
     }
 
 
     renderListOfModules() {
-        let modules = this.state.modules
-            .map(function(module){ // map iterates and accumlates results
-                return <ModuleListItem title={module.title} key={module.id}/>
-            });
+        let modules = this.state.modules.map(
+            (module) => { // map iterates and accumlates results
+                return <ModuleListItem module={module} key={module.id}
+                                       deleteModule={this.deleteModule}/>
+            }
+        );
         return modules;
     }
 
