@@ -9,14 +9,7 @@ class ModuleList extends React.Component {
         this.state = {
             courseId: '',
             module: {title: ''},
-            modules: [
-                {title: 'Module 1 - jQuery', id: 123},
-                {title: 'Module 2 - React', id: 234},
-                {title: 'Module 3 - Redux', id: 345},
-                {title: 'Module 4 - Angular', id: 456},
-                {title: 'Module 5 - Node.js', id: 567},
-                {title: 'Module 6 - MongoDB', id: 678},
-            ]
+            modules: []
         };
 
         // Binding HTML elements to functions
@@ -31,6 +24,11 @@ class ModuleList extends React.Component {
 
     setModules(modules) {
         this.setState({modules: modules})
+    }
+
+
+    setCourseId(courseId) {
+        this.setState({courseId: courseId});
     }
 
 
@@ -51,9 +49,6 @@ class ModuleList extends React.Component {
 
     }
 
-    setCourseId(courseId) {
-        this.setState({courseId: courseId});
-    }
 
     titleChanged(event) {
         console.log(event.target.value);
@@ -64,6 +59,7 @@ class ModuleList extends React.Component {
         console.log(this.state.module);
         this.moduleService.createModule(this.props.courseId, this.state.module)
     }
+
 
     renderListOfModules() {
         let modules = this.state.modules

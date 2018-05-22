@@ -7,19 +7,23 @@ class CourseEditor extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {courseId: ''};
+        this.state = {
+            courseId: ''
+        };
 
         this.selectCourse = this.selectCourse.bind(this);
     }
 
 
-    componentDidMount() {
-        this.selectCourse(this.props.match.params.courseId);
+    // Setting the state of the component
+    selectCourse(courseId) {
+        this.setState({courseId: courseId});
     }
 
 
-    selectCourse(courseId) {
-        this.setState({courseId: courseId});
+    // Passing in the state to the state setter
+    componentDidMount() {
+        this.selectCourse(this.props.match.params.courseId);
     }
 
 
