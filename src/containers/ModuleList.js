@@ -102,7 +102,8 @@ class ModuleList extends React.Component {
                            onChange={this.titleChanged}
                            placeholder="Enter Module Name"/>
 
-                    <span className="input-group-addon"><button type='button'
+                    <span className="input-group-addon">
+                        <button type='button'
                             className="btn btn-info btn-lg"
                             onClick={this.createModule}>
                         <i className="fa fa-plus"></i>
