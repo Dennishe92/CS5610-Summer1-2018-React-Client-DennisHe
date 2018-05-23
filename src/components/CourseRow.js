@@ -26,7 +26,7 @@ class CourseRow extends React.Component {
                     </td>
 
                     <td>
-                        {this.props.course.modified}
+                        <h6>May 23, 2018</h6>
                     </td>
 
                     <td>
