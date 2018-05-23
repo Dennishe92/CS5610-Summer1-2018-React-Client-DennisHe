@@ -56,6 +56,13 @@ class ModuleService {
             });
     }
 
+    findModuleById(moduleId) {
+        return fetch(MODULE_API_URL2 + '/' + moduleId)
+            .then(function(response) {
+                return response.json();
+            });
+    }
+
 }
 
 export default ModuleService;

@@ -9,9 +9,9 @@ class ModuleListItem extends React.Component {
 
     render() {
         return (
-            <li className="list-group-item">
+            <li className="list-group-item form-control">
                 <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
-                {this.props.module.title}
+                    <strong>{this.props.module.title}</strong>
                 </Link>
                 <span className="float-right">
                     <i  onClick={() => this.props.deleteModule(this.props.module.id)}

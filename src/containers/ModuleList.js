@@ -8,7 +8,7 @@ class ModuleList extends React.Component {
         super(props);
         this.state = {
             courseId: '',
-            module: {title: ''},
+            module: {title: 'DefaultModule'},
             modules: []
         };
 
@@ -50,7 +50,6 @@ class ModuleList extends React.Component {
     componentWillReceiveProps(newProps){
         this.setCourseId(newProps.courseId);
         this.findAllModulesForCourse(newProps.courseId)
-
     }
 
 
@@ -67,6 +66,7 @@ class ModuleList extends React.Component {
                 this.findAllModulesForCourse(this.state.courseId);
             });
         document.getElementById('inputFld').value = '';
+        this.setState({module: {title: 'DefaultModule'}});
     }
 
 
@@ -91,19 +91,27 @@ class ModuleList extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='container'>
+                <br></br>
                 <h3>Module List for course: {this.state.courseId}</h3>
-                <input type="text"
-                       id="inputFld"
-                       className="form-control"
-                       onChange={this.titleChanged}
-                       placeholder="Enter Module Name"/>
+                <div className="input-group">
+                    <br></br>
+                    <input type="text"
+                           className="form-control"
+                           id="inputFld"
+                           onChange={this.titleChanged}
+                           placeholder="Enter Module Name"/>
 
-                <button onClick={this.createModule} className="btn btn-primary btn-block">
-                    <i className="fa fa-plus"></i>
-                </button>
+                    <span className="input-group-addon"><button type='button'
+                            className="btn btn-info btn-lg"
+                            onClick={this.createModule}>
+                        <i className="fa fa-plus"></i>
+                    </button></span>
+                </div>
+
 
                 <ul className="list-group">
+                    <br></br>
                     {this.renderListOfModules()}
                 </ul>
             </div>

@@ -11,7 +11,6 @@ class CourseManager extends React.Component {
         return (
             <Router>
                 <div>
-                    <h1>Course Manager</h1>
 
                     <Route path="/courses"
                            component={CourseList}>

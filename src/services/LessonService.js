@@ -55,6 +55,13 @@ class LessonService {
         });
     }
 
+    findLessonById(lessonId) {
+        return fetch(LESSON_API_URL2 + '/' + lessonId)
+            .then(function(response) {
+                return response.json();
+            });
+    }
+
 }
 
 export default LessonService;

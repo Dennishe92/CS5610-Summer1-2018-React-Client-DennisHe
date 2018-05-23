@@ -11,26 +11,28 @@ class ModuleEditor extends React.Component {
         };
     }
 
-    selectModule(moduleId) {
-        this.setState({moduleId: moduleId});
-    }
     selectCourse(courseId) {
         this.setState({courseId: courseId});
     }
 
+    selectModule(moduleId) {
+        this.setState({moduleId: moduleId});
+    }
+
     componentDidMount() {
         console.log(this.props);
-        this.selectModule(this.props.match.params.moduleId);
         this.selectCourse(this.props.match.params.courseId);
+        this.selectModule(this.props.match.params.moduleId);
     }
 
     render() {
         return (
-            <div>
-                <h2>Editing Module: {this.state.moduleId}</h2>
+            <div className="container">
+                <br></br>
+                <h3>Editing Module: {this.props.match.params.moduleId}</h3>
                 <div>
-                    <LessonTabs moduleId={this.state.moduleId}
-                                courseId={this.state.courseId}/>
+                    <LessonTabs moduleId={this.props.match.params.moduleId}
+                                courseId={this.props.match.params.courseId}/>
                 </div>
             </div>
         )

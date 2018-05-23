@@ -8,6 +8,7 @@ class CourseList extends React.Component {
     constructor() {
         super();
         this.state = {
+            course: {title: 'DefaultCourse'},
             courses: []
 
         };
@@ -46,18 +47,17 @@ class CourseList extends React.Component {
     renderCourseRows() {
         let courses = this.state.courses.map(
             (course) => {return <CourseRow course={course} key={course.id}
-                                      deleteCourse={this.deleteCourse}/>
-                }
-             );
+                                           deleteCourse={this.deleteCourse}/>
+            }
+        );
         return courses;
     }
 
 
     // standard signatures for event handlers. This one is for input field.
     titleChanged(event) {
-        this.setState({
-            course: { title: event.target.value }
-        });
+        console.log(event.target.value);
+        this.setState({course: { title: event.target.value }});
     }
 
 
@@ -83,27 +83,34 @@ class CourseList extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='container'>
 
-                <h2>Course List</h2>
-                <table className="table">
-                    <thead>
-                    <tr>
+                <nav className="navbar navbar-dark bg-dark">
+                    <th>
+                        <a className="navbar-brand" href="http://localhost:3000/courses">
+                            <i className="fa fa-home d-inline-block align-middle"
+                               width="30" height="30" alt=""></i>
+                        </a>
+                        <label className="navbar-brand">Course Manager</label>
+                    </th>
+
+                    <form className="form-inline">
                         <th><input onChange={this.titleChanged}
-                                   className="form-control" id="titleFld" placeholder="Enter Course Name"/></th>
+                                   className="form-control mr-sm-2" type="search"
+                                   id="titleFld" placeholder="Enter Course Name"/></th>
                         <th><button onClick={this.createCourse}
-                                    className="btn btn-primary">Add</button></th>
-                    </tr>
-                    </thead>
-                </table>
+                                    className="btn btn-outline-success my-2 my-sm-0">Add</button></th>
+                    </form>
+                </nav>
 
-                <table className="table">
+
+                <table className="table table-striped">
                     <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Owned By</th>
-                        <th>Last Modified</th>
-                        <th></th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Owned By</th>
+                        <th scope="col">Last Modified</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
 

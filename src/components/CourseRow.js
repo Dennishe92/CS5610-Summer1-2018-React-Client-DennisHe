@@ -15,6 +15,7 @@ class CourseRow extends React.Component {
                 <tr>
 
                     <th>
+                        <i className="fa fa-book"></i>
                         <Link to={`/course/${this.props.course.id}`}>
                         {this.props.course.title}
                         </Link>

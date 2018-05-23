@@ -9,7 +9,7 @@ class LessonTabs extends React.Component {
         this.state = {
             courseId: '',
             moduleId: '',
-            lesson: {title: ''},
+            lesson: {title: 'DefaultLesson'},
             lessons: []
         };
 
@@ -50,6 +50,7 @@ class LessonTabs extends React.Component {
         this.setModuleId(this.props.moduleId);
     }
 
+    // Cashing, rerendering
     componentWillReceiveProps(newProps) {
         this.setCourseId(newProps.courseId);
         this.setModuleId(newProps.moduleId);
@@ -68,6 +69,7 @@ class LessonTabs extends React.Component {
                 this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
             });
         document.getElementById('lessonInputFld').value = '';
+        this.setState({lesson: {title: 'DefaultLesson'}});
     }
 
     deleteLesson(lessonId) {
@@ -83,6 +85,7 @@ class LessonTabs extends React.Component {
                 return <LessonTabItem courseId={this.state.courseId}
                                       moduleId={this.state.moduleId}
                                       lesson={lesson}
+                                      key={lesson.id}
                                       deleteLesson={this.deleteLesson}/>
             }
         );
@@ -92,20 +95,26 @@ class LessonTabs extends React.Component {
     render() {
         return (
             <div>
-                <h2>Lesson List for Module: {this.state.moduleId}</h2>
-                <input type="text"
-                       id="lessonInputFld"
-                       className="form-control"
-                       onChange={this.titleChanged}
-                       placeholder="Enter Lesson Name"/>
+                <div className="input-group">
+                    <input type="text"
+                           id="lessonInputFld"
+                           className="form-control"
+                           onChange={this.titleChanged}
+                           placeholder="Enter Lesson Name"/>
 
-                <button onClick={this.createLesson} className="btn btn-primary btn-block">
-                    <i className="fa fa-plus"></i>
-                </button>
+                    <span className="input-group-addon">
+                        <button onClick={this.createLesson}
+                                className="btn btn-info btn-lg">
+                        <i className="fa fa-plus"></i>
+                    </button></span>
+                </div>
 
-                <ul className="list-group">
+                <br></br>
+                <ul className="nav nav-tabs">
+
                     {this.renderListOfLessons()}
                 </ul>
+
 
             </div>
 
