@@ -51,13 +51,13 @@ class CourseEditor extends React.Component {
         return(
             <div className="container">
                 <nav className="navbar navbar-dark bg-dark">
-                    <th>
+                    <span>
                         <a className="navbar-brand" href="http://localhost:3000/courses">
                             <i className="fa fa-home d-inline-block align-middle"
                                width="30" height="30" alt=""></i>
                         </a>
                         <label className="navbar-brand">Editing Course: {this.state.courseId}</label>
-                    </th>
+                    </span>
                 </nav>
 
                 <div className="row">

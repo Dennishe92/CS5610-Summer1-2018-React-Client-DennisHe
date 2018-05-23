@@ -86,20 +86,20 @@ class CourseList extends React.Component {
             <div className='container'>
 
                 <nav className="navbar navbar-dark bg-dark">
-                    <th>
-                        <a className="navbar-brand" href="http://localhost:3000/courses">
-                            <i className="fa fa-home d-inline-block align-middle"
-                               width="30" height="30" alt=""></i>
-                        </a>
-                        <label className="navbar-brand">Course Manager</label>
-                    </th>
+                    <span>
+                    <a className="navbar-brand" href="http://localhost:3000/courses">
+                        <i className="fa fa-home d-inline-block align-middle"
+                           width="30" height="30" alt=""></i>
+                    </a>
+                    <label className="navbar-brand">Course Manager</label>
+                    </span>
 
                     <form className="form-inline">
-                        <th><input onChange={this.titleChanged}
+                        <span><input onChange={this.titleChanged}
                                    className="form-control mr-sm-2" type="search"
-                                   id="titleFld" placeholder="Enter Course Name"/></th>
-                        <th><button onClick={this.createCourse}
-                                    className="btn btn-outline-success my-2 my-sm-0">Add</button></th>
+                                   id="titleFld" placeholder="Enter Course Name"/></span>
+                        <span><button onClick={this.createCourse}
+                                    className="btn btn-outline-success my-2 my-sm-0">Add</button></span>
                     </form>
                 </nav>
 
