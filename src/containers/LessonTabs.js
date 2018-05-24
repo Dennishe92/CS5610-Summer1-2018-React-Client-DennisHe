@@ -9,7 +9,7 @@ class LessonTabs extends React.Component {
         this.state = {
             courseId: '',
             moduleId: '',
-            lesson: {title: 'DefaultLesson'},
+            lesson: {title: 'New Lesson'},
             lessons: []
         };
 
@@ -69,7 +69,7 @@ class LessonTabs extends React.Component {
                 this.findAllLessonsForModule(this.state.courseId, this.state.moduleId);
             });
         document.getElementById('lessonInputFld').value = '';
-        this.setState({lesson: {title: 'DefaultLesson'}});
+        this.setState({lesson: {title: 'New Lesson'}});
     }
 
     deleteLesson(lessonId) {

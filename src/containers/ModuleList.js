@@ -8,7 +8,7 @@ class ModuleList extends React.Component {
         super(props);
         this.state = {
             courseId: '',
-            module: {title: 'DefaultModule'},
+            module: {title: 'New Module'},
             modules: []
         };
 
@@ -66,7 +66,7 @@ class ModuleList extends React.Component {
                 this.findAllModulesForCourse(this.state.courseId);
             });
         document.getElementById('inputFld').value = '';
-        this.setState({module: {title: 'DefaultModule'}});
+        this.setState({module: {title: 'New Module'}});
     }
 
 

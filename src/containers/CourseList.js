@@ -8,7 +8,7 @@ class CourseList extends React.Component {
     constructor() {
         super();
         this.state = {
-            course: {title: 'DefaultCourse'},
+            course: {title: 'New Course'},
             courses: []
 
         };
