@@ -1,12 +1,13 @@
 import React from 'react'
 
-import LessonTabs from './LessonTabs'
-import LessonEditor from './LessonEditor'
+import App from './WidgetList'
+import {widgetReducer} from "../reducers/WidgetReducer";
 
-class ModuleEditor extends React.Component {
+class LessonEditor extends React.Component {
     constructor(props) { // props has courseId
         super(props);
         this.state = {
+            lessonId:'',
             moduleId:'',
             courseId:''
         };
@@ -20,22 +21,30 @@ class ModuleEditor extends React.Component {
         this.setState({moduleId: moduleId});
     }
 
+    selectLesson(lessonId) {
+        this.setState({lessonId: lessonId})
+    }
+
     componentDidMount() {
         console.log(this.props);
         this.selectCourse(this.props.match.params.courseId);
         this.selectModule(this.props.match.params.moduleId);
+        this.selectModule(this.props.match.params.lessonId);
     }
+
+    let store = createStore(widgetReducer);
 
     render() {
         return (
+            <Provider store = {store}>
             <div className="container">
                 <br></br>
-                <h3>Editing Module: {this.props.match.params.moduleId}</h3>
+                <h3>Editing Lesson: {this.props.match.params.lessonId}</h3>
                 <div>
-                    <LessonTabs moduleId={this.props.match.params.moduleId}
-                                courseId={this.props.match.params.courseId}/>
+                    <App lessonId={this.props.match.params.lessonId}/>
                 </div>
             </div>
+            </Provider>
         )
     }
 
@@ -43,4 +52,4 @@ class ModuleEditor extends React.Component {
 
 }
 
-export default ModuleEditor;
+export default LessonEditor;
