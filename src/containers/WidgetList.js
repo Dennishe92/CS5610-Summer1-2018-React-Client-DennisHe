@@ -13,21 +13,51 @@ class WidgetList extends React.Component {
         this.props.findAllWidgets() // invoke from the server
     }
     render() {
+
         return (
-            <div>
-                <h1>Widget List {this.props.widgets.length}</h1>
+            <div className="form-group">
+                {/*<h1>Widget List {this.props.widgets.length}</h1>*/}
 
-                <button hidden={this.props.previewMode} onClick={this.props.save}>Save</button>
-                <button onClick={this.props.preview}>Preview</button>
 
-                <ul>
-                    {this.props.widgets.map(widget => (
-                        <Widget widget={widget}
-                                preview={this.props.previewMode}
-                                key={widget.id}/>
-                    ))}
-                </ul>
-                <button onClick={this.props.addWidget}>Add</button>
+                <div>
+                    <form className="form-inline float-right">
+                        <button
+                            className="btn btn-success my-2 my-sm-0 mr-sm-1 float-right"
+                            hidden={this.props.previewMode}
+                            onClick={this.props.save}>
+                            Save
+                        </button>
+
+                        <button
+                            className="btn btn-info my-2 my-sm-0 float-right"
+                            onClick={this.props.preview}>
+                            Preview
+                        </button>
+                    </form>
+                </div>
+
+                <br/>
+                <br/>
+                <br/>
+
+                <div>
+                    <ul>
+                        {this.props.widgets.map(widget => (
+                            <Widget widget={widget}
+                                    preview={this.props.previewMode}
+                                    key={widget.id}/>
+                        ))}
+                    </ul>
+                </div>
+
+                <div>
+                    <button
+                        className="btn btn-primary my-2 my-sm-0 float-right"
+                        onClick={() => this.props.addWidget(this.props.lessonId)}>
+                        <i className="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                </div>
+
             </div>
         )
     }
@@ -36,12 +66,13 @@ class WidgetList extends React.Component {
 
 const stateToPropertyMapper = (state) => ({
     widgets: state.widgets,
-    previewMode: state.preview
+    previewMode: state.preview,
+
 });
 
 const dispatcherToPropsMapper = (dispatch) => ({
     findAllWidgets: () => actions.findAllWidgets(dispatch),
-    addWidget: () => actions.addWidget(dispatch),
+    addWidget: (lessonId) => actions.addWidget(dispatch, lessonId),
     save: () => actions.save(dispatch),
     preview: () => actions.preview(dispatch)
 });

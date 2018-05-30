@@ -8,8 +8,11 @@ export const findAllWidgets = (dispatch) => {
         )
 };
 
-export const addWidget = (dispatch) => (
-    dispatch({type: constants.ADD_WIDGET})
+export const addWidget = (dispatch, lessonId) => (
+    dispatch({
+        type: constants.ADD_WIDGET,
+        lessonId: lessonId
+    })
 );
 
 export const save = (dispatch) => (
@@ -61,9 +64,25 @@ export const listTypeChanged = (dispatch, widgetId, listType) => (
     dispatch({
         type: constants.LIST_TYPE_CHANGED,
         id: widgetId,
-        list: listType
+        listType: listType
     })
 );
+
+export const imageUrlChanged = (dispatch, widgetId, newImage) => (
+    dispatch({
+        type: constants.IMAGE_URL_CHANGED,
+        id: widgetId,
+        text: newImage
+    })
+);
+
+export const linkUrlChanged = (dispatch, widgetId, newLink) => (
+    dispatch({
+        type: constants.LINK_URL_CHANGED,
+        id: widgetId,
+        text: newLink
+    })
+)
 
 
 

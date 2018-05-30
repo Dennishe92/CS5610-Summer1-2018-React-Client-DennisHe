@@ -44,7 +44,7 @@ class LessonEditor extends React.Component {
             <Provider store = {store}>
             <div className="container">
                 <br></br>
-                <h3>Editing Lesson: {this.props.match.params.lessonId}</h3>
+                {/*<h3>Editing Lesson: {this.props.match.params.lessonId}</h3>*/}
                 <div>
                     <App lessonId={this.props.match.params.lessonId}/>
                 </div>

@@ -3,6 +3,17 @@ import * as constants from "../constants/index"
 export const widgetReducer = (state = {widgets: []}, action) => {
     switch(action.type) {
 
+
+
+        case constants.IMAGE_URL_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.id) {
+                        widget.text = action.text
+                    }
+                })
+            }
+
         case constants.LIST_TYPE_CHANGED:
             return {
                 widgets: state.widgets.map(widget => {
@@ -71,13 +82,16 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                 widgets: state.widgets.filter((widget) => {
                     if(widget.id === action.id) {
                         widget.widgetType = action.widgetType
+
                     }
+
                     return true;
                 })
             }
             return JSON.parse(JSON.stringify(newState))
 
         case constants.SAVE:
+            console.log(state.widgets);
             fetch('http://localhost:8080/api/course/{courseId}/module/{moduleId}/lesson/{lessonId}/widget/save', {
                 method: 'post',
                 body: JSON.stringify(state.widgets),
@@ -99,14 +113,19 @@ export const widgetReducer = (state = {widgets: []}, action) => {
             }
 
         case constants.ADD_WIDGET:
+            console.log("Reducer" + JSON.stringify(action));
             return {
+                lessonId: state.lessonId,
                 widgets: [
                     ...state.widgets,
                     {id: state.widgets.length + 1,
                         text: 'New Widget',
                         widgetType: 'Paragraph',
                         size: '2',
-                        list: 'Unordered List'
+                        listType: 'Unordered List',
+                        name: 'Default Name',
+                        lessonId:  action.lessonId,
+                        widgetOrder: state.widgets.length
                     }
                 ]
             }
