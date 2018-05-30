@@ -4,8 +4,10 @@ import {widgetReducer} from "../reducers/WidgetReducer";
 import Widget from "../components/Widget"
 import * as actions from "../actions/index"
 
+import {Provider, connect} from 'react-redux';
 
-class WidgetList extends Component {
+
+class WidgetList extends React.Component {
     constructor(props) {
         super(props);
         this.props.findAllWidgets() // invoke from the server
@@ -25,7 +27,7 @@ class WidgetList extends Component {
                                 key={widget.id}/>
                     ))}
                 </ul>
-                <button onClick={this.props.addWidget}></button>
+                <button onClick={this.props.addWidget}>Add</button>
             </div>
         )
     }
@@ -38,13 +40,11 @@ const stateToPropertyMapper = (state) => ({
 });
 
 const dispatcherToPropsMapper = (dispatch) => ({
-    findAllWidgets: () => findAllWidgets(dispatch),
-    addWidget: () => addWidget(dispatch),
-    save: () => save(dispatch),
+    findAllWidgets: () => actions.findAllWidgets(dispatch),
+    addWidget: () => actions.addWidget(dispatch),
+    save: () => actions.save(dispatch),
     preview: () => actions.preview(dispatch)
 });
-
-const store = createStore(widgetReducer);
 
 const App = connect(stateToPropertyMapper,
     dispatcherToPropsMapper)(WidgetList);

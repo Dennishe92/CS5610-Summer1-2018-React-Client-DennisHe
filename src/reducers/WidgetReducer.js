@@ -3,10 +3,46 @@ import * as constants from "../constants/index"
 export const widgetReducer = (state = {widgets: []}, action) => {
     switch(action.type) {
 
+        case constants.LIST_TYPE_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.id) {
+                        widget.list = action.list;
+                    }
+                })
+            }
+
+        case constants.LIST_TEXT_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.id) {
+                        widget.text = action.text
+                    }
+                })
+            }
+
+        case constants.PARAGRAPH_TEXT_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.id) {
+                        widget.text = action.text
+                    }
+                })
+            }
+
         case constants.PREVIEW:
             return {
                 widgets: state.widgets,
                 preview: !state.preview
+            }
+
+        case constants.WIDGET_CHANGE_NAME:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.id) {
+                        widget.name = action.name
+                    }
+                })
             }
 
         case constants.HEADING_TEXT_CHANGED:
@@ -63,14 +99,14 @@ export const widgetReducer = (state = {widgets: []}, action) => {
             }
 
         case constants.ADD_WIDGET:
-            alert('adding a widget')
             return {
                 widgets: [
                     ...state.widgets,
                     {id: state.widgets.length + 1,
                         text: 'New Widget',
                         widgetType: 'Paragraph',
-                        size: '2'
+                        size: '2',
+                        list: 'Unordered List'
                     }
                 ]
             }

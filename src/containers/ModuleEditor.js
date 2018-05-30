@@ -2,6 +2,7 @@ import React from 'react'
 
 import LessonTabs from './LessonTabs'
 import LessonEditor from './LessonEditor'
+import Route from "react-router-dom/es/Route";
 
 class ModuleEditor extends React.Component {
     constructor(props) { // props has courseId
@@ -34,6 +35,9 @@ class ModuleEditor extends React.Component {
                 <div>
                     <LessonTabs moduleId={this.props.match.params.moduleId}
                                 courseId={this.props.match.params.courseId}/>
+                    <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId"
+                           component={LessonEditor}>
+                    </Route>
                 </div>
             </div>
         )

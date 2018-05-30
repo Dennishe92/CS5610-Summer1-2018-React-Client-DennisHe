@@ -3,6 +3,12 @@ import React from 'react'
 import App from './WidgetList'
 import {widgetReducer} from "../reducers/WidgetReducer";
 
+import {Provider, connect} from 'react-redux';
+import {createStore} from 'redux';
+
+
+const store = createStore(widgetReducer);
+
 class LessonEditor extends React.Component {
     constructor(props) { // props has courseId
         super(props);
@@ -29,10 +35,9 @@ class LessonEditor extends React.Component {
         console.log(this.props);
         this.selectCourse(this.props.match.params.courseId);
         this.selectModule(this.props.match.params.moduleId);
-        this.selectModule(this.props.match.params.lessonId);
+        this.selectLesson(this.props.match.params.lessonId);
     }
 
-    let store = createStore(widgetReducer);
 
     render() {
         return (
