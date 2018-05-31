@@ -151,12 +151,12 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                     ...state.widgets,
                     {   id: state.widgets.length + 1,
                         text: 'New Widget',
-                        widgetType: 'Paragraph',
+                        widgetType: 'Heading',
                         size: '1',
                         listType: 'Unordered List',
                         name: 'New Name',
-                        lessonId : action.lessonId,
-                        widgetOrder: state.widgets.length + 1
+                        widgetOrder: state.widgets.length + 1,
+                        lessonId: action.lessonId
                     }
                 ]
             }

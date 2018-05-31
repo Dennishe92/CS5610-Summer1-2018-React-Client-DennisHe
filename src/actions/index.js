@@ -28,20 +28,6 @@ export const addWidget = (dispatch, lessonId) => (
     })
 );
 
-// export const moveUp = (dispatch, widgetId) => (
-//     dispatch({
-//         type: constants.MOVE_UP,
-//         id: widgetId
-//     })
-// );
-//
-// export const moveDown = (dispatch, widgetId) => (
-//     dispatch({
-//         type: constants.MOVE_DOWN,
-//         id: widgetId
-//     })
-// );
-
 export const save = (dispatch, lessonId) => (
     dispatch({
         type: constants.SAVE,

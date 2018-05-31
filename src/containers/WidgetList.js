@@ -10,12 +10,12 @@ import {Provider, connect} from 'react-redux';
 class WidgetList extends React.Component {
     constructor(props) {
         super(props);
-     //   this.props.findAllWidgets() // invoke from the server
+        // this.props.findAllWidgets() // invoke from the server
     }
 
-    componentDidMount(props) {
-        console.log(props);
-    }
+    // componentDidMount(props) {
+    //     console.log(props);
+    // }
 
     componentWillReceiveProps(newProps){
         if (newProps.lessonId !== this.props.lessonId) {
@@ -58,7 +58,8 @@ class WidgetList extends React.Component {
                         {this.props.widgets.map(widget => (
                             <Widget widget={widget}
                                     preview={this.props.previewMode}
-                                    />
+                                    key={widget.id}
+                            />
                         ))}
                     </ul>
                 </div>
