@@ -4,14 +4,14 @@ import * as constants from "../constants/index"
 import * as actions from '../actions'
 
 const Heading = ({widget, preview, headingTextChanged, headingSizeChanged, widgetChangeName}) => {
-    let selectElem;
-    let inputElem;
-    let nameElem;
+    let selectElem
+    let inputElem
+    let nameElem
     return(
         <div>
             <form>
                 <div hidden={preview} className="form-group">
-                    <h2>Heading Widget</h2>
+                    <h2>Heading Widget {widget.widgetType}</h2>
 
                     <div className="form-group">
                         <input className="form-control"
@@ -51,8 +51,8 @@ const Heading = ({widget, preview, headingTextChanged, headingSizeChanged, widge
 //----------------------------------------------------------------------------------------------------------------------
 
 const Paragraph = ({widget, preview, widgetChangeName, paragraphTextChanged}) => {
-    let inputElem;
-    let nameElem;
+    let inputElem
+    let nameElem
 
     return (
         <div>
@@ -85,9 +85,9 @@ const Paragraph = ({widget, preview, widgetChangeName, paragraphTextChanged}) =>
 };
 
 const List = ({widget, preview, widgetChangeName, listTextChanged, listTypeChanged}) => {
-    let listElem;
-    let inputElem;
-    let nameElem;
+    let listElem
+    let inputElem
+    let nameElem
     return (
         <div>
             <form>
@@ -123,15 +123,21 @@ const List = ({widget, preview, widgetChangeName, listTextChanged, listTypeChang
                 </div>
             </form>
 
-            {widget.listType == 'Unordered List' && <h3>{widget.text}</h3>}
-            {widget.listType == 'Ordered List' && <h3>{widget.text}</h3>}
+            {widget.listType == 'Unordered List' &&
+            <ul>{widget.text.split("/n").map(item => (
+                <li>{item}</li>
+            ))}</ul>}
+
+            {widget.listType == 'Ordered List' && <ol>{widget.text.split("/n").map(item => (
+                <li>{item}</li>
+            ))}</ol>}
         </div>
     )
 }
 
 const Image = ({widget, preview, widgetChangeName, imageUrlChanged}) => {
-    let inputElem;
-    let nameElem;
+    let inputElem
+    let nameElem
     return (
         <div>
             <form>
@@ -155,7 +161,7 @@ const Image = ({widget, preview, widgetChangeName, imageUrlChanged}) => {
                     <h3>Preview</h3>
                 </div>
             </form>
-            //fix me
+            <img src={widget.text}/>
         </div>
     )
 }
@@ -164,8 +170,8 @@ const Image = ({widget, preview, widgetChangeName, imageUrlChanged}) => {
 
 
 const Link = ({widget, preview, widgetChangeName, linkUrlChanged}) => {
-    let inputElem;
-    let nameElem;
+    let inputElem
+    let nameElem
     return (
         <div>
             <form>
@@ -200,25 +206,18 @@ const dispatchToPropsMapper = dispatch => ({
         actions.headingTextChanged(dispatch, widgetId, newText),
     headingSizeChanged: (widgetId, newSize) =>
         actions.headingSizeChanged(dispatch, widgetId, newSize),
-
     widgetChangeName: (widgetId, newName) =>
         actions.widgetChangeName(dispatch, widgetId, newName),
-
     paragraphTextChanged: (widgetId, newText) =>
-        actions.paragraphTextChanged(dispatch,widgetId,newText),
-
+        actions.paragraphTextChanged(dispatch, widgetId, newText),
     listTextChanged: (widgetId, newText) =>
         actions.listTextChanged(dispatch, widgetId, newText),
     listTypeChanged: (widgetId, newList) =>
         actions.listTypeChanged(dispatch, widgetId, newList),
-
     imageUrlChanged: (widgetId, newImage) =>
         actions.imageUrlChanged(dispatch, widgetId, newImage),
-
     linkUrlChanged: (widgetId, newUrl) =>
         actions.linkUrlChanged(dispatch, widgetId, newUrl)
-
-
 });
 
 const stateToPropsMapper = state => ({
@@ -242,12 +241,15 @@ export const Widget = ({widget, dispatch, preview}) => {
 
                 <form className="form-inline float-right">
 
-                     <span><button className="btn btn-warning mr-sm-1">
+                     <span><button className="btn btn-warning mr-sm-1"
+                                   type="button"
+                                   onClick={() => (dispatch({type: constants.MOVE_UP, id: widget.id}))}>
                         <i className="fa fa-arrow-up" aria-hidden="true"></i>
                     </button></span>
 
-                    <span><button
-                        className="btn btn-warning mr-sm-1">
+                    <span><button className="btn btn-warning mr-sm-1"
+                                  type="button"
+                                  onClick={() => (dispatch({type: constants.MOVE_DOWN, id: widget.id}))}>
                         <i className="fa fa-arrow-down" aria-hidden="true"></i>
                     </button></span>
 
@@ -258,9 +260,10 @@ export const Widget = ({widget, dispatch, preview}) => {
                             dispatch({
                                 type: constants.SELECT_WIDGET_TYPE,
                                 id: widget.id,
-                                widgetType: selectElement.value,
+                                widgetType: selectElement.value
                             })}
                         ref={node => selectElement = node}>
+
                     <option>Heading</option>
                     <option>Paragraph</option>
                     <option>List</option>

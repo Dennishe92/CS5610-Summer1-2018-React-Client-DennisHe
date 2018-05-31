@@ -38,7 +38,6 @@ class LessonEditor extends React.Component {
         this.selectLesson(this.props.match.params.lessonId);
     }
 
-
     render() {
         return (
             <Provider store = {store}>

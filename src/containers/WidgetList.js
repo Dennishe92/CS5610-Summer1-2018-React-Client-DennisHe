@@ -10,8 +10,19 @@ import {Provider, connect} from 'react-redux';
 class WidgetList extends React.Component {
     constructor(props) {
         super(props);
-        this.props.findAllWidgets() // invoke from the server
+     //   this.props.findAllWidgets() // invoke from the server
     }
+
+    componentDidMount(props) {
+        console.log(props);
+    }
+
+    componentWillReceiveProps(newProps){
+        if (newProps.lessonId !== this.props.lessonId) {
+            this.props.findAllWidgetsForLesson(newProps.lessonId)
+        }
+    }
+
     render() {
 
         return (
@@ -23,12 +34,14 @@ class WidgetList extends React.Component {
                     <form className="form-inline float-right">
                         <button
                             className="btn btn-success my-2 my-sm-0 mr-sm-1 float-right"
+                            type="button"
                             hidden={this.props.previewMode}
-                            onClick={this.props.save}>
+                            onClick={() => this.props.save(this.props.lessonId)}>
                             Save
                         </button>
 
                         <button
+                            type="button"
                             className="btn btn-info my-2 my-sm-0 float-right"
                             onClick={this.props.preview}>
                             Preview
@@ -45,7 +58,7 @@ class WidgetList extends React.Component {
                         {this.props.widgets.map(widget => (
                             <Widget widget={widget}
                                     preview={this.props.previewMode}
-                                    key={widget.id}/>
+                                    />
                         ))}
                     </ul>
                 </div>
@@ -71,9 +84,10 @@ const stateToPropertyMapper = (state) => ({
 });
 
 const dispatcherToPropsMapper = (dispatch) => ({
+    findAllWidgetsForLesson:(lessonId) => actions.findAllWidgetsForLesson(dispatch, lessonId),
     findAllWidgets: () => actions.findAllWidgets(dispatch),
-    addWidget: (lessonId) => actions.addWidget(dispatch, lessonId),
-    save: () => actions.save(dispatch),
+    addWidget:(lessonId) => actions.addWidget(dispatch, lessonId),
+    save: (lessonId) => actions.save(dispatch, lessonId),
     preview: () => actions.preview(dispatch)
 });
 

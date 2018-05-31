@@ -3,14 +3,13 @@ import * as constants from "../constants/index"
 export const widgetReducer = (state = {widgets: []}, action) => {
     switch(action.type) {
 
-
-
         case constants.IMAGE_URL_CHANGED:
             return {
                 widgets: state.widgets.map(widget => {
                     if(widget.id === action.id) {
                         widget.text = action.text
                     }
+                    return Object.assign({}, widget);
                 })
             }
 
@@ -20,6 +19,7 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                     if(widget.id === action.id) {
                         widget.list = action.list;
                     }
+                    return Object.assign({}, widget);
                 })
             }
 
@@ -29,6 +29,7 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                     if(widget.id === action.id) {
                         widget.text = action.text
                     }
+                    return Object.assign({}, widget);
                 })
             }
 
@@ -38,6 +39,7 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                     if(widget.id === action.id) {
                         widget.text = action.text
                     }
+                    return Object.assign({}, widget);
                 })
             }
 
@@ -53,6 +55,7 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                     if(widget.id === action.id) {
                         widget.name = action.name
                     }
+                    return Object.assign({}, widget);
                 })
             }
 
@@ -92,7 +95,8 @@ export const widgetReducer = (state = {widgets: []}, action) => {
 
         case constants.SAVE:
             console.log(state.widgets);
-            fetch('http://localhost:8080/api/course/{courseId}/module/{moduleId}/lesson/{lessonId}/widget/save', {
+            console.log(action.lessonId);
+            fetch("http://localhost:8080/api/lesson/"+action.lessonId+"/widget/save", {
                 method: 'post',
                 body: JSON.stringify(state.widgets),
                 headers: {
@@ -105,6 +109,33 @@ export const widgetReducer = (state = {widgets: []}, action) => {
             newState.widgets = action.widgets
             return newState
 
+        case constants.FIND_ALL_WIDGETS_FOR_LESSON:
+            newState = Object.assign({}, state)
+            newState.widgets = action.widgets
+            return newState
+
+        case constants.MOVE_UP:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.id) {
+                        widget.widgetOrder++
+                    }
+                    console.log(widget.widgetOrder);
+                    return true;
+                })
+            }
+
+        case constants.MOVE_DOWN:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.id) {
+                        widget.widgetOrder--
+                    }
+                    console.log(widget.widgetOrder);
+                    return true;
+                })
+            }
+
         case constants.DELETE_WIDGET:
             return {
                 widgets: state.widgets.filter(widget => (
@@ -113,19 +144,19 @@ export const widgetReducer = (state = {widgets: []}, action) => {
             }
 
         case constants.ADD_WIDGET:
-            console.log("Reducer" + JSON.stringify(action));
+            console.log("Reducer" + JSON.stringify(action.lessonId));
             return {
-                lessonId: state.lessonId,
+
                 widgets: [
                     ...state.widgets,
-                    {id: state.widgets.length + 1,
+                    {   id: state.widgets.length + 1,
                         text: 'New Widget',
                         widgetType: 'Paragraph',
-                        size: '2',
+                        size: '1',
                         listType: 'Unordered List',
-                        name: 'Default Name',
-                        lessonId:  action.lessonId,
-                        widgetOrder: state.widgets.length
+                        name: 'New Name',
+                        lessonId : action.lessonId,
+                        widgetOrder: state.widgets.length + 1
                     }
                 ]
             }

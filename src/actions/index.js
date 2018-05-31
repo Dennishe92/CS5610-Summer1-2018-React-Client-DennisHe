@@ -1,10 +1,23 @@
 import * as constants from "../constants/index"
 
+const WIDGET_API_URL = 'http://localhost:8080/api/lesson/LID/widget';
+//'http://localhost:8080/api/widget'
+
 export const findAllWidgets = (dispatch) => {
+    //console.log(response);
     fetch('http://localhost:8080/api/widget')
         .then(response => (response.json()))
         .then(widgets =>
             dispatch({type: constants.FIND_ALL_WIDGETS, widgets: widgets})
+        )
+};
+
+export const findAllWidgetsForLesson = (dispatch, lessonId) => {
+    console.log(lessonId);
+    fetch(WIDGET_API_URL.replace('LID', lessonId))
+        .then(response => (response.json()))
+        .then(widgets =>
+            dispatch({type: constants.FIND_ALL_WIDGETS_FOR_LESSON, widgets: widgets})
         )
 };
 
@@ -15,8 +28,25 @@ export const addWidget = (dispatch, lessonId) => (
     })
 );
 
-export const save = (dispatch) => (
-    dispatch({type: constants.SAVE})
+// export const moveUp = (dispatch, widgetId) => (
+//     dispatch({
+//         type: constants.MOVE_UP,
+//         id: widgetId
+//     })
+// );
+//
+// export const moveDown = (dispatch, widgetId) => (
+//     dispatch({
+//         type: constants.MOVE_DOWN,
+//         id: widgetId
+//     })
+// );
+
+export const save = (dispatch, lessonId) => (
+    dispatch({
+        type: constants.SAVE,
+        lessonId: lessonId
+    })
 );
 
 export const preview = dispatch => (
@@ -48,41 +78,36 @@ export const paragraphTextChanged = (dispatch, widgetId, newText) => (
     dispatch({
         type: constants.PARAGRAPH_TEXT_CHANGED,
         id: widgetId,
-        text: newText
-    })
+        text: newText})
 );
 
 export const listTextChanged = (dispatch, widgetId, newText) => (
     dispatch({
         type: constants.LIST_TEXT_CHANGED,
         id: widgetId,
-        text: newText
-    })
+        text: newText})
 );
 
 export const listTypeChanged = (dispatch, widgetId, listType) => (
     dispatch({
         type: constants.LIST_TYPE_CHANGED,
         id: widgetId,
-        listType: listType
-    })
+        listType: listType})
 );
 
 export const imageUrlChanged = (dispatch, widgetId, newImage) => (
     dispatch({
         type: constants.IMAGE_URL_CHANGED,
         id: widgetId,
-        text: newImage
-    })
+        text: newImage})
 );
 
 export const linkUrlChanged = (dispatch, widgetId, newLink) => (
     dispatch({
         type: constants.LINK_URL_CHANGED,
         id: widgetId,
-        text: newLink
-    })
-)
+        text: newLink})
+);
 
 
 
