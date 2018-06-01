@@ -108,7 +108,7 @@ const List = ({widget, preview, widgetChangeName, listTextChanged, listTypeChang
                     <div className="form-group">
                         <select className="form-control"
                                 onChange={() => listTypeChanged(widget.id, listElem.value)}
-                                value={widget.list}
+                                value={widget.listType}
                                 ref={node => listElem = node}>
                             <option>Unordered List</option>
                             <option>Ordered List</option>
@@ -128,11 +128,11 @@ const List = ({widget, preview, widgetChangeName, listTextChanged, listTypeChang
             </form>
 
             {widget.listType == 'Unordered List' &&
-            <ul>{widget.text.split("/n").map(item => (
+            <ul>{widget.text.split("\n").map(item => (
                 <li>{item}</li>
             ))}</ul>}
 
-            {widget.listType == 'Ordered List' && <ol>{widget.text.split("/n").map(item => (
+            {widget.listType == 'Ordered List' && <ol>{widget.text.split("\n").map(item => (
                 <li>{item}</li>
             ))}</ol>}
         </div>
@@ -175,7 +175,8 @@ const Image = ({widget, preview, widgetChangeName, imageUrlChanged}) => {
 
 
 
-const Link = ({widget, preview, widgetChangeName, linkUrlChanged}) => {
+const Link = ({widget, preview, widgetChangeName, linkUrlChanged, linkTextChanged}) => {
+    let linkElem
     let inputElem
     let nameElem
     return (
@@ -186,7 +187,15 @@ const Link = ({widget, preview, widgetChangeName, linkUrlChanged}) => {
 
                     <div className="form-group">
                         <input className="form-control"
-                               onChange={() => linkUrlChanged(widget.id, inputElem.value)}
+                               onChange={() => linkUrlChanged(widget.id, linkElem.value)}
+                               value={widget.href}
+                               ref={node => linkElem = node}
+                               placeholder="Link URL"/>
+                    </div>
+
+                    <div className="form-group">
+                        <input className="form-control"
+                               onChange={() => linkTextChanged(widget.id, inputElem.value)}
                                value={widget.text}
                                ref={node => inputElem = node}
                                placeholder="Link text"/>
@@ -203,7 +212,7 @@ const Link = ({widget, preview, widgetChangeName, linkUrlChanged}) => {
                     <h3>Preview</h3>
                 </div>
             </form>
-            // fix me
+            <h2><a href={widget.href} target="_blank">{widget.text}</a></h2>
         </div>
     )
 }
@@ -216,16 +225,23 @@ const dispatchToPropsMapper = dispatch => ({
         actions.headingSizeChanged(dispatch, widgetId, newSize),
     widgetChangeName: (widgetId, newName) =>
         actions.widgetChangeName(dispatch, widgetId, newName),
+
     paragraphTextChanged: (widgetId, newText) =>
         actions.paragraphTextChanged(dispatch, widgetId, newText),
+
     listTextChanged: (widgetId, newText) =>
         actions.listTextChanged(dispatch, widgetId, newText),
     listTypeChanged: (widgetId, newList) =>
         actions.listTypeChanged(dispatch, widgetId, newList),
+
     imageUrlChanged: (widgetId, newImage) =>
         actions.imageUrlChanged(dispatch, widgetId, newImage),
+
     linkUrlChanged: (widgetId, newUrl) =>
-        actions.linkUrlChanged(dispatch, widgetId, newUrl)
+        actions.linkUrlChanged(dispatch, widgetId, newUrl),
+
+    linkTextChanged: (widgetId, newText) =>
+        actions.linkTextChanged(dispatch, widgetId, newText)
 });
 
 const stateToPropsMapper = state => ({

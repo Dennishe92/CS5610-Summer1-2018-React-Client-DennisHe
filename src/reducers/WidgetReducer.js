@@ -4,6 +4,27 @@ import 'array.prototype.move';
 export const widgetReducer = (state = {widgets: []}, action) => {
     switch(action.type) {
 
+        case constants.LINK_URL_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.href = action.href
+                    }
+                    return Object.assign({}, widget);
+                })
+            }
+
+
+        case constants.LINK_TEXT_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.id) {
+                        widget.text = action.text
+                    }
+                    return Object.assign({}, widget);
+                })
+            }
+
         case constants.IMAGE_URL_CHANGED:
             return {
                 widgets: state.widgets.map(widget => {
@@ -18,7 +39,7 @@ export const widgetReducer = (state = {widgets: []}, action) => {
             return {
                 widgets: state.widgets.map(widget => {
                     if(widget.id === action.id) {
-                        widget.list = action.list;
+                        widget.listType = action.listType;
                     }
                     return Object.assign({}, widget);
                 })
@@ -175,8 +196,7 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                         listType: 'Unordered List',
                         name: '',
                         widgetOrder: state.widgets.length + 1,
-                        href: '',
-                        src: ''
+                        href: ''
                     }
                 ]
             }

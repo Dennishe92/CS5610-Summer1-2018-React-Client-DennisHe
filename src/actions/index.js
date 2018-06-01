@@ -92,7 +92,14 @@ export const linkUrlChanged = (dispatch, widgetId, newLink) => (
     dispatch({
         type: constants.LINK_URL_CHANGED,
         id: widgetId,
-        text: newLink})
+        href: newLink})
+);
+
+export const linkTextChanged = (dispatch, widgetId, newText) => (
+    dispatch({
+        type: constants.LINK_TEXT_CHANGED,
+        id: widgetId,
+        text: newText})
 );
 
 
