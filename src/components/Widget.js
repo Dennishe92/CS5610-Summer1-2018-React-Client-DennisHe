@@ -8,7 +8,7 @@ const Heading = ({widget, preview, headingTextChanged, headingSizeChanged, widge
     let inputElem
     let nameElem
     return(
-        <div>
+        <div id="heading">
             <form>
                 <div hidden={preview} className="form-group">
                     <h2>Heading Widget</h2>
@@ -47,6 +47,7 @@ const Heading = ({widget, preview, headingTextChanged, headingSizeChanged, widge
             {widget.size == 1 && <h1>{widget.text}</h1>}
             {widget.size == 2 && <h2>{widget.text}</h2>}
             {widget.size == 3 && <h3>{widget.text}</h3>}
+            <br/>
         </div>
     )
 }
@@ -57,7 +58,7 @@ const Paragraph = ({widget, preview, widgetChangeName, paragraphTextChanged}) =>
     let nameElem
 
     return (
-        <div>
+        <div id="paragraph">
             <form>
                 <div hidden={preview} className="form-group">
                     <h2>Paragraph Widget</h2>
@@ -82,7 +83,7 @@ const Paragraph = ({widget, preview, widgetChangeName, paragraphTextChanged}) =>
                 </div>
             </form>
             <h2>{widget.text}</h2>
-
+            <br/>
         </div>
     )
 };
@@ -92,7 +93,7 @@ const List = ({widget, preview, widgetChangeName, listTextChanged, listTypeChang
     let inputElem
     let nameElem
     return (
-        <div>
+        <div id="list">
             <form>
                 <div hidden={preview} className="form-group">
                     <h2>List Widget</h2>
@@ -135,6 +136,8 @@ const List = ({widget, preview, widgetChangeName, listTextChanged, listTypeChang
             {widget.listType == 'Ordered List' && <ol>{widget.text.split("\n").map(item => (
                 <li>{item}</li>
             ))}</ol>}
+
+            <br/>
         </div>
     )
 }
@@ -143,7 +146,7 @@ const Image = ({widget, preview, widgetChangeName, imageUrlChanged}) => {
     let inputElem
     let nameElem
     return (
-        <div>
+        <div id="image">
             <form>
                 <div hidden={preview} className="form-group">
                     <h2>Image Widget</h2>
@@ -168,6 +171,7 @@ const Image = ({widget, preview, widgetChangeName, imageUrlChanged}) => {
                 </div>
             </form>
             <img className="img-responsive img-thumbnail" src={widget.text}></img>
+            <br/>
         </div>
     )
 }
@@ -180,7 +184,7 @@ const Link = ({widget, preview, widgetChangeName, linkUrlChanged, linkTextChange
     let inputElem
     let nameElem
     return (
-        <div>
+        <div id="link">
             <form>
                 <div hidden={preview} className="form-group">
                     <h2>Link Widget</h2>
@@ -213,6 +217,7 @@ const Link = ({widget, preview, widgetChangeName, linkUrlChanged, linkTextChange
                 </div>
             </form>
             <h2><a href={widget.href} target="_blank">{widget.text}</a></h2>
+            <br/>
         </div>
     )
 }
@@ -260,7 +265,7 @@ export const Widget = ({widget, dispatch, preview}) => {
     let selectElement;
 
     return (
-        <div>
+        <div id="whole">
             <div hidden={preview}>
 
                 <form className="form-inline float-right">
