@@ -11,7 +11,7 @@ const Heading = ({widget, preview, headingTextChanged, headingSizeChanged, widge
         <div>
             <form>
                 <div hidden={preview} className="form-group">
-                    <h2>Heading Widget {widget.widgetType}</h2>
+                    <h2>Heading Widget</h2>
 
                     <div className="form-group">
                         <input className="form-control"
@@ -161,7 +161,7 @@ const Image = ({widget, preview, widgetChangeName, imageUrlChanged}) => {
                     <h3>Preview</h3>
                 </div>
             </form>
-            <img src={widget.text}/>
+            <img className="img-responsive img-thumbnail" src={widget.text}></img>
         </div>
     )
 }
@@ -243,13 +243,13 @@ export const Widget = ({widget, dispatch, preview}) => {
 
                      <span><button className="btn btn-warning mr-sm-1"
                                    type="button"
-                                   onClick={() => (dispatch({type: constants.MOVE_UP, id: widget.id}))}>
+                                   onClick={() => (dispatch({type: constants.MOVE_UP, widgetOrder: widget.widgetOrder}))}>
                         <i className="fa fa-arrow-up" aria-hidden="true"></i>
                     </button></span>
 
                     <span><button className="btn btn-warning mr-sm-1"
                                   type="button"
-                                  onClick={() => (dispatch({type: constants.MOVE_DOWN, id: widget.id}))}>
+                                  onClick={() => (dispatch({type: constants.MOVE_DOWN, widgetOrder: widget.widgetOrder}))}>
                         <i className="fa fa-arrow-down" aria-hidden="true"></i>
                     </button></span>
 

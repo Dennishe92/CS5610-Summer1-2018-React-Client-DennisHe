@@ -58,7 +58,7 @@ class WidgetList extends React.Component {
                         {this.props.widgets.map(widget => (
                             <Widget widget={widget}
                                     preview={this.props.previewMode}
-                                    key={widget.id}
+                                    //key={widget.id}
                             />
                         ))}
                     </ul>

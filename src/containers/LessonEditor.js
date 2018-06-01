@@ -31,12 +31,14 @@ class LessonEditor extends React.Component {
         this.setState({lessonId: lessonId})
     }
 
-    componentDidMount() {
-        console.log(this.props);
-        this.selectCourse(this.props.match.params.courseId);
-        this.selectModule(this.props.match.params.moduleId);
-        this.selectLesson(this.props.match.params.lessonId);
+    componentWillReceiveProps(newProps) {
+        console.log(newProps);
+        this.selectCourse(newProps.match.params.courseId);
+        this.selectModule(newProps.match.params.moduleId);
+        this.selectLesson(newProps.match.params.lessonId);
     }
+
+
 
     render() {
         return (
@@ -45,7 +47,7 @@ class LessonEditor extends React.Component {
                 <br></br>
                 {/*<h3>Editing Lesson: {this.props.match.params.lessonId}</h3>*/}
                 <div>
-                    <App lessonId={this.props.match.params.lessonId}/>
+                    <App lessonId={this.state.lessonId}/>
                 </div>
             </div>
             </Provider>

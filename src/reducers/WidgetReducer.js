@@ -1,4 +1,5 @@
 import * as constants from "../constants/index"
+import 'array.prototype.move';
 
 export const widgetReducer = (state = {widgets: []}, action) => {
     switch(action.type) {
@@ -115,26 +116,44 @@ export const widgetReducer = (state = {widgets: []}, action) => {
             return newState
 
         case constants.MOVE_UP:
-            return {
-                widgets: state.widgets.map(widget => {
-                    if(widget.id === action.id) {
-                        widget.widgetOrder++
+        {
+            if (action.widgetOrder > 1) {
+
+                let resultList = state.widgets.filter(widget => {
+                    if (widget.widgetOrder === action.widgetOrder - 1) {
+                        widget.widgetOrder++;
+                    }
+                    if (widget.widgetOrder === action.widgetOrder) {
+                        widget.widgetOrder--;
                     }
                     console.log(widget.widgetOrder);
                     return true;
-                })
+                });
+                resultList.move(action.widgetOrder-1, action.widgetOrder-2 );
+                return {widgets: resultList};
             }
+            return state;
+        }
 
         case constants.MOVE_DOWN:
-            return {
-                widgets: state.widgets.map(widget => {
-                    if(widget.id === action.id) {
-                        widget.widgetOrder--
+        {
+            if (action.widgetOrder < state.widgets.length) {
+
+                let resultList = state.widgets.filter(widget => {
+                    if (widget.widgetOrder === action.widgetOrder) {
+                        widget.widgetOrder++;
+                    }
+                    if (widget.widgetOrder === action.widgetOrder+1) {
+                        widget.widgetOrder--;
                     }
                     console.log(widget.widgetOrder);
                     return true;
-                })
+                });
+                resultList.move(action.widgetOrder-1, action.widgetOrder);
+                return {widgets: resultList};
             }
+            return state;
+        }
 
         case constants.DELETE_WIDGET:
             return {
