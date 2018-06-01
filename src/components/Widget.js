@@ -15,6 +15,7 @@ const Heading = ({widget, preview, headingTextChanged, headingSizeChanged, widge
 
                     <div className="form-group">
                         <input className="form-control"
+                               placeholder="Heading text"
                                onChange={() => headingTextChanged(widget.id, inputElem.value)}
                                value={widget.text}
                                ref={node => inputElem = node}/>
@@ -33,6 +34,7 @@ const Heading = ({widget, preview, headingTextChanged, headingSizeChanged, widge
 
                     <div className="form-group">
                         <input className="form-control"
+                               placeholder="Widgit name"
                                onChange={() => widgetChangeName(widget.id, nameElem.value)}
                                value={widget.name}
                                ref={node => nameElem = node}/>
@@ -72,7 +74,8 @@ const Paragraph = ({widget, preview, widgetChangeName, paragraphTextChanged}) =>
                         <input className="form-control"
                                onChange={() => widgetChangeName(widget.id, nameElem.value)}
                                value={widget.name}
-                               ref={node => nameElem = node}/>
+                               ref={node => nameElem = node}
+                               placeholder="Widget name"/>
                     </div>
 
                     <h3>Preview</h3>
@@ -116,7 +119,8 @@ const List = ({widget, preview, widgetChangeName, listTextChanged, listTypeChang
                         <input className="form-control"
                                onChange={() => widgetChangeName(widget.id, nameElem.value)}
                                value={widget.name}
-                               ref={node => nameElem = node}/>
+                               ref={node => nameElem = node}
+                               placeholder="Heading text"/>
                     </div>
 
                     <h3>Preview</h3>
@@ -148,14 +152,16 @@ const Image = ({widget, preview, widgetChangeName, imageUrlChanged}) => {
                         <input className="form-control"
                                onChange={() => imageUrlChanged(widget.id, inputElem.value)}
                                value={widget.text}
-                               ref={node => inputElem = node}/>
+                               ref={node => inputElem = node}
+                               placeholder="Image URL"/>
                     </div>
 
                     <div className="form-group">
                         <input className="form-control"
                                onChange={() => widgetChangeName(widget.id, nameElem.value)}
                                value={widget.name}
-                               ref={node => nameElem = node}/>
+                               ref={node => nameElem = node}
+                               placeholder="Widget name"/>
                     </div>
 
                     <h3>Preview</h3>
@@ -182,14 +188,16 @@ const Link = ({widget, preview, widgetChangeName, linkUrlChanged}) => {
                         <input className="form-control"
                                onChange={() => linkUrlChanged(widget.id, inputElem.value)}
                                value={widget.text}
-                               ref={node => inputElem = node}/>
+                               ref={node => inputElem = node}
+                               placeholder="Link text"/>
                     </div>
 
                     <div className="form-group">
                         <input className="form-control"
                                onChange={() => widgetChangeName(widget.id, nameElem.value)}
                                value={widget.name}
-                               ref={node => nameElem = node}/>
+                               ref={node => nameElem = node}
+                               placeholder="Widget name"/>
                     </div>
 
                     <h3>Preview</h3>

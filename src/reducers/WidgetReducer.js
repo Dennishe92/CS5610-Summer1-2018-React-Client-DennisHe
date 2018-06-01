@@ -123,7 +123,7 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                     if (widget.widgetOrder === action.widgetOrder - 1) {
                         widget.widgetOrder++;
                     }
-                    if (widget.widgetOrder === action.widgetOrder) {
+                    else if (widget.widgetOrder === action.widgetOrder) {
                         widget.widgetOrder--;
                     }
                     console.log(widget.widgetOrder);
@@ -143,7 +143,7 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                     if (widget.widgetOrder === action.widgetOrder) {
                         widget.widgetOrder++;
                     }
-                    if (widget.widgetOrder === action.widgetOrder+1) {
+                    else if (widget.widgetOrder === action.widgetOrder+1) {
                         widget.widgetOrder--;
                     }
                     console.log(widget.widgetOrder);
@@ -169,13 +169,14 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                 widgets: [
                     ...state.widgets,
                     {   id: state.widgets.length + 1,
-                        text: 'New Widget',
+                        text: '',
                         widgetType: 'Heading',
                         size: '1',
                         listType: 'Unordered List',
-                        name: 'New Name',
+                        name: '',
                         widgetOrder: state.widgets.length + 1,
-                        lessonId: action.lessonId
+                        href: '',
+                        src: ''
                     }
                 ]
             }
