@@ -13,8 +13,8 @@ class WidgetList extends React.Component {
         // this.props.findAllWidgets() // invoke from the server
     }
 
-    // componentDidMount(props) {
-    //     console.log(props);
+    // componentDidMount() {
+    //     this.props.findAllWidgetsForLesson(this.props.lessonId);
     // }
 
     componentWillReceiveProps(newProps){
@@ -58,7 +58,7 @@ class WidgetList extends React.Component {
                         {this.props.widgets.map(widget => (
                             <Widget widget={widget}
                                     preview={this.props.previewMode}
-                                    //key={widget.id}
+                                    key={widget.id}
                             />
                         ))}
                     </ul>
